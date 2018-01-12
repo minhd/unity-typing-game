@@ -2,10 +2,13 @@
 public class Word {
     public string word;
     private int typeIndex;
+    WordDisplay display;
 
-    public Word(string word) {
+    public Word(string word, WordDisplay display) {
+        this.display = display;
         this.word = word;
         typeIndex = 0;
+        this.display.setWord(this.word);
     }
 
     public char getNextLetter() {
@@ -14,10 +17,14 @@ public class Word {
 
     public void typeLetter() {
         typeIndex++;
-        // remove the letter on screen
+        display.RemoveLetter();
     }
 
     public bool wordTyped() {
-        return typeIndex >= word.Length - 1;
+        bool typed =  typeIndex >= word.Length - 1;
+        if (typed) {
+            display.RemoveWord();
+        }
+        return typed;
     }
 }

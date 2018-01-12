@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class WordManager : MonoBehaviour {
     public List<Word> words;
-    [SerializeField] public Word activeWord;
+    [SerializeField] private Word activeWord;
     [SerializeField] private bool hasActiveWord;
+
+    public WordSpawner wordSpawner;
 
     private void Start() {
         AddWord();
@@ -13,8 +14,8 @@ public class WordManager : MonoBehaviour {
         AddWord();
     }
 
-    private void AddWord() {
-        Word word = new Word(WordGenerator.GetRandomWord());
+    public void AddWord() {
+        Word word = new Word(WordGenerator.GetRandomWord(), wordSpawner.SpawnWord());
         words.Add(word);
     }
 
